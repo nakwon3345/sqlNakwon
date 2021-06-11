@@ -1,0 +1,23 @@
+select * from emp where deptno in(10, 20);
+select ename, job from emp;
+select concat('나의 이름은', ename) as name from emp;
+select ename  || '사원님의 직무는'  || job  || '입니다' from emp;
+
+
+ select trunc(1234.45678, -3) from dual;
+
+ select floor(months_between(sysdate, '1996/02/25')) from dual;
+
+select empno, format(sal, 0), format(comm, 0), hiredate from emp;
+
+select months_between(sysdate, '2021/05/17') from dual;
+
+select to_char(hiredate, 'yyyy-mm-dd') from emp;
+
+select empno, to_char(sal, 'L999,999'), to_char(comm, 'L999,999'), to_char(hiredate, 'yyyy-mm-dd') from emp
+order by hiredate desc;
+
+조회 항목 : 사번, 급여, 수당, 입사일
+급여, 수당은 천단위 마다 컴마 표기
+통화 단위는 기본 로케일
+입사일 : 연도4자리-월2자리-일2자리 형식으로 조회
