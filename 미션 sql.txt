@@ -1,0 +1,60 @@
+1. select empno, ename, to_char(hiredate, 'yyyy-mm-dd') from emp;
+
+2. select distinct job from emp order by job;
+
+3. select * from emp where sal >= 3000;
+
+4. select *l from emp where ename = 'SMITH';
+
+5. select * from emp where deptno = 10 and job = 'MANAGER';
+
+6. select * from emp where deptno != 10 and (job = 'CLERK' or job = 'MANAGER');
+
+7. select * from emp where sal >= 1000 and sal <=3000 and job = 'SALESMAN';
+
+8. select * from emp where job = 'CLERK' or job = 'MANAGER' or job = 'SALESMAN';
+
+9. select * from emp where job != 'CLERK' and job != 'MANAGER' and job != 'SALESMAN';
+
+10. select * from emp where ename like '%A%' and sal > 2000;
+
+11. select to_char(sysdate, 'yyyy-mm-dd') from dual;
+
+12. select to_char(sysdate, 'HH:MI') from dual;
+
+13. select deptno "부서번호", count(*) "인원수", sum(sal) "총급여", avg(sal) "평균급여", max(sal) "최대급여", min(sal) "최소급여", max(sal)-min(sal) "급여차이" from emp group by deptno order by deptno; 
+
+14. select rownum "순번", empno "사번", ename " 이름", sal "현재급여" from (select * from emp order by sal asc) where rownum <= 3;
+
+15. select empno, sal, case when sal < (select avg(sal)from emp) then '대상자' else '미대상' end "대상여부" from emp order by 대상여부;
+
+16. select empno 사번, ename 이름, hiredate 입사일, trunc(months_between(sysdate, hiredate)/12) 근속년수 from emp;오후 4:15 2021-06-14
+
+17. select * from emp where HIREDATE like '%81%';
+
+18. select rpad(count(*), 3, '명') "1월" from emp where to_char(hiredate, 'mm') = '01';
+
+19. 
+
+20. select case when comm is not null then sal + (sal+comm)*0.5 when comm is null then sal * 0.5 else sal * 0.5 end "특별상여금" from emp;
+
+21. select deptno 부서번호, to_char(trunc(avg(sal), -2), '999,999')  평균급여, count(*) 인원수 from emp group by deptno order by 평균급여 desc;
+
+22. select deptno 부서번호, to_char(trunc(avg(sal), -2), '999,999') 평균급여, count(*) 인원수 from emp group by deptno having avg(sal) > 2000 order by 평균급여 desc;
+
+23. select empno 사번, ename 이름, decode(job, 'PRESIDENT', '15%', 'ANALYST', '10%', 'MANAGER', '10%', '3%') 경조비율, to_char(sal, '999,999') 급여,
+trunc(decode(job, 'PRESIDENT', (sal+nvl(comm, 0))*0.15, 
+'ANALYST', (sal+nvl(comm,0))*0.1,
+'MANAGER', (sal+nvl(comm,0))*0.1, (sal+nvl(comm,0))*0.03), -1) 경조회비 from emp order by 경조회비 desc;
+
+24. select empno 사번, ename 이름, case when job = 'PRESIDENT' then '15%' when job = 'ANALYST' then '10%' 
+when job = 'MANAGER' then '10%' else '3%' end 경조비율, to_char(sal, '999,999') 급여, 
+to_char(case when job = 'PRESIDENT' then (sal+nvl(comm,0)) * 0.15 when job = 'ANALYST' then (sal+nvl(comm,0)) * 0.1 
+when job = 'MANAGER' then (sal+nvl(comm,0)) * 0.15 else (sal+nvl(comm,0)) * 0.03 end, '999,999') 경조회비 from emp order by 경조회비 desc;
+
+25. select * from(select * from emp where empno = 7788);
+
+26. select * from emp where job = upper('salesman') or job = upper('analyst') order by job;
+
+27. select * from emp where job = any(select job from emp where empno = 7369 or empno = 7499);
+
