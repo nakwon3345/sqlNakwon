@@ -12,7 +12,7 @@ create table member(
     MOBILE varchar2(13) NOT NULL,
     EMAIL varchar2(30) NOT NULL,
     ENTRY_DATE varchar2(10) NOT NULL,
-    GRADE varchar2(6) NOT NULL,
+    GRADE varchar2(4) NOT NULL,
     MILEAGE varchar2(6),
-    MANAGER varchar2(6));
+    MANAGER varchar2(20));
     
